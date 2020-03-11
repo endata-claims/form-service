@@ -1,0 +1,11 @@
+extend type Form {
+  cards: [Card!]
+}
+
+type Card {
+  id: ID!
+  title: String
+
+  order: Int
+  grid: Grid
+}

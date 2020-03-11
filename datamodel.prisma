@@ -1,0 +1,85 @@
+enum ReportStatus { REPORTING REPORTED }
+type Report {
+  id: ID! @id
+  claimId: ID! @unique
+
+  data: Json! @default(value: "{}")
+  status: ReportStatus! @default(value: REPORTING)
+
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Form {
+  id: ID! @id
+  cards: [FormCard!] @relation(name: "FormCard")
+
+  title: String
+  description: String
+}
+
+type FormCard {
+  id: ID! @id
+
+  order: Int!
+  card: Card @relation(name: "CardInFormCard")
+
+  form: Form! @relation(name: "FormCard")
+}
+
+type Card {
+  id: ID! @id
+
+  title: String
+  grid: Int! @default(value: 12)
+
+  formCard: [FormCard!] @relation(name: "CardInFormCard")
+  fields: [CardField!] @relation(name: "CardField")
+}
+
+type CardField {
+  id: ID! @id
+
+  order: Int!
+  field: Field @relation(name: "FieldInCardField")
+
+  cards: [Card!] @relation(name: "CardField")
+  groups: [Field!] @relation(name: "GroupFields")
+}
+
+enum FieldType {
+  InfoField
+  TextField
+  TextAreaField
+  SelectField
+  SwitchField
+  FileField
+  DateTimeField
+  GroupField
+}
+type FieldOption {
+  id: ID! @id
+
+  label: String!
+  value: String!
+}
+type Field {
+  id: ID! @id
+
+  grid: Int! @default(value: 12)
+  type: FieldType! @default(value: TextField)
+
+  label: String!
+  name: String
+
+  rows: Int
+  rowsMax: Int
+  groupFields: [CardField!] @relation(name: "GroupFields")
+
+  value: String
+  valueFrom: String
+  options: [FieldOption!]
+
+  # validationRegex: String
+  cardField: [CardField!] @relation(name: "FieldInCardField")
+}

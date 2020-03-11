@@ -1,0 +1,7 @@
+Dockerfile
+__tests__
+
+node_modules
+
+*.lock
+*.log*

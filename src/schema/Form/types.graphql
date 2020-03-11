@@ -1,0 +1,11 @@
+type Query {
+  # forms: [Form!]
+  _form(id: ID!): Form
+}
+
+type Form {
+  id: ID!
+
+  title: String
+  description: String
+}

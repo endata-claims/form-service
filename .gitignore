@@ -1,0 +1,6 @@
+Dockerfile
+__tests__
+
+node_modules
+
+*.log*

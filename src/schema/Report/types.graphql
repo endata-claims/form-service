@@ -1,0 +1,33 @@
+scalar Json
+
+extend type Query {
+  _report(claimId: ID!): Report
+}
+
+type Mutation {
+  claimReportUpsert(claimId: ID!, data: Json!): Report!
+  claimReportSubmit(claimId: ID!): Report!
+  claimReportReset(claimId: ID!): Report!
+}
+
+enum ReportStatus { REPORTING REPORTED }
+type Report {
+  id: ID!
+
+  data: Json
+  status: ReportStatus!
+}
+
+# Claim {
+#   report: Form
+#   # survey: [Form!]
+#   # revisions
+# }
+
+# # submit:  status
+# # reset: status
+# Form {
+#   data: ReportData!
+
+#   ...cards
+# }

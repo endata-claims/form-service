@@ -1,0 +1,114 @@
+extend type Card {
+  fields: [Field!]
+}
+
+interface Field {
+  id: ID!
+  label: String
+
+  order: Int
+  grid: Grid
+}
+
+###
+ # InfoField
+ ##
+type InfoField implements Field {
+  id: ID!
+  order: Int
+  grid: Grid
+  label: String
+
+  value: String
+}
+
+###
+ # TextField
+ ##
+type TextField implements Field {
+  id: ID!
+  order: Int
+  grid: Grid
+  label: String
+
+  name: String
+}
+# TextAreaField
+type TextAreaField implements Field {
+  id: ID!
+  order: Int
+  grid: Grid
+  label: String
+
+  name: String
+
+  rows: Int
+  rowsMax: Int
+}
+
+###
+ # SelectField
+ ##
+type SelectField implements Field {
+  id: ID!
+  order: Int
+  grid: Grid
+  label: String
+
+  name: String
+  options: [SelectFieldOption!]
+}
+type SelectFieldOption {
+  id: ID!
+  label: String!
+  value: String!
+}
+
+###
+ # SwitchField
+ ##
+type SwitchField implements Field {
+  id: ID!
+  order: Int
+  grid: Grid
+  label: String
+
+  name: String
+}
+
+###
+ # FileField
+ ##
+type FileField implements Field {
+  id: ID!
+  order: Int
+  grid: Grid
+  label: String
+
+  name: String
+}
+
+###
+ # DateTimeField
+ ##
+type DateTimeField implements Field {
+  id: ID!
+  order: Int
+  grid: Grid
+  label: String
+
+  name: String
+}
+
+###
+ # GroupField
+ ##
+type GroupField implements Field {
+  id: ID!
+  order: Int
+  grid: Grid
+  label: String
+
+  name: String
+  fields: [Field!]
+}
